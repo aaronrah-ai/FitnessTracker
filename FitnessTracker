@@ -1,0 +1,45 @@
+import datetime
+
+# 1. The Core Progressive Overload Calculator
+def calculate_epley_1rm(weight, reps):
+    """
+    Calculates Estimated 1-Rep Max using the Epley Formula.
+    Formula: 1RM = w * (1 + r / 30)
+    """
+    if reps <= 0:
+        return 0
+    if reps == 1:
+        return float(weight)
+    return round(weight * (1 + (reps / 30)), 2)
+
+# 2. Simulation of Your Workout Database
+workout_database = []
+
+def log_workout(exercise, weight, reps, date_string=None):
+    """Logs a workout session into our simulated database."""
+    if date_string is None:
+        date_string = datetime.date.today().strftime("%Y-%m-%d")
+        
+    estimated_1rm = calculate_epley_1rm(weight, reps)
+    
+    entry = {
+        "date": date_string,
+        "exercise": exercise,
+        "weight": weight,
+        "reps": reps,
+        "estimated_1rm": estimated_1rm
+    }
+    workout_database.append(entry)
+    print(f"Logged: {exercise} - {weight} lbs x {reps} reps (Est. 1RM: {estimated_1rm} lbs)")
+
+# 3. Executing Your Bench Press Progression Example
+print("--- LOGGING YOUR BENCH PRESS PROGRESSION ---")
+log_workout("Bench Press", 135, 10, "2026-07-01")
+log_workout("Bench Press", 140, 8,  "2026-07-08")
+log_workout("Bench Press", 145, 6,  "2026-07-15")
+log_workout("Bench Press", 150, 5,  "2026-07-22")
+
+# 4. Displaying Progress Data Stream
+print("\n--- APP DASHBOARD PROGRESS VIEW ---")
+for workout in workout_database:
+    print(f"[{workout['date']}] {workout['exercise']}: Raw Weight = {workout['weight']} lbs | True Strength Performance = {workout['estimated_1rm']} lbs")
