@@ -1,0 +1,25 @@
+import datetime
+
+def display_global_network_hub():
+    """Calculates and prints current times across your international network."""
+    # Current Trinidad baseline time
+    now_tt = datetime.datetime.now()
+    
+    # Timezone offsets relative to Trinidad (AST / UTC-4) in 2026
+    network_offsets = {
+        "Trinidad & Tobago (Home Hub)": 0,
+        "France (Paris / CET)": 5,
+        "Germany (Berlin / CET)": 5,
+        "Italy (Rome / CET)": 5,
+        "Turkey (Istanbul / TRT)": 7,
+        "Uzbekistan (Tashkent / UZT)": 9
+    }
+    
+    print("=== YOUR GLOBAL CONNECTIONS DASHBOARD ===")
+    for country, offset in network_offsets.items():
+        country_time = now_tt + datetime.timedelta(hours=offset)
+        print(f"🌍 {country:<30} -> {country_time.strftime('%I:%M %p (%A)')}")
+    print("=========================================")
+
+# Execute the live monitoring layout
+display_global_network_hub()
